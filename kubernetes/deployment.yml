@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-template
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: k8s-template
+  template:
+    metadata:
+      labels:
+        app: k8s-template
+    spec:
+      containers:
+      - name: k8s-template
+        image: andrew/k8s-template
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-template
+spec:
+  type: NodePort
+  selector:
+    app: k8s-template
+  ports:
+  - port: 80
+    targetPort: 8080

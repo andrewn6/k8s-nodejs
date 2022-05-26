@@ -10,5 +10,5 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["nodemon", "src/index.ts"]
+CMD ["node", "src/index.js"]
 
